@@ -1,0 +1,789 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+    <script>
+  window.intercomSettings = {
+    app_id: "pgxpv4zh"
+  };
+</script>
+
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/pgxpv4zh';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+    <style>
+    .content pre, .content blockquote {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+      float: none;
+    }
+    </style>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="using-behave-pro">Using Behave Pro</h1>
+
+<p>This section contains articles that describe how to use Behave Pro features within JIRA. Use the menu at the left, or click one of the links below.</p>
+
+<h2 id="add-a-scenario-to-a-jira-issue">Add a Scenario to a JIRA Issue</h2>
+
+<p>In JIRA, developers will use an issue to manage a user story or software requirement. Consider an example requirement for inventory management, in which a store manager wants any item that arrives as a result of a refund or an exchange to be put back into stock.</p>
+
+<p>&ldquo;Refunded or exchanged items should be returned to stock.&rdquo;</p>
+
+<p>At right, we show the JIRA issue that represents this requirement.A scenario is an example that clearly elucidates the requirements. The Behave Pro plugin adds features to JIRA so that team members can associate one or more scenarios with a JIRA issue.</p>
+
+<p><img alt="Adding a scenario to a user story" src="images/add_scenario.png" /></p>
+
+<p>Often, it&rsquo;s best to have two or more examples.Here is are the steps for one scenario that complements the JIRA issue above:</p>
+<pre class="highlight gherkin"><code><span class="nf">Given</span> a customer previously bought a black sweater
+<span class="nf">And</span> I currently have three black sweaters left in stock
+<span class="nf">When</span> the customer returns the sweater for a refund
+<span class="nf">Then</span> I should have four black sweaters in stock
+</code></pre>
+
+<p>Below the <strong>Description</strong>, in the <strong>Acceptance Criteria</strong> of the JIRA Issue page, you&rsquo;ll find the <strong>+ Add Scenarios</strong> button. Click that button to add a <strong>scenario</strong>, then enter the <strong>Feature</strong> name, <strong>Scenario</strong> title and the <strong>Steps</strong>. When the scenario is complete, click the <strong>Create Scenario</strong> button. See the figure to the right.</p>
+
+<p>For illustration, here is another scenario that you could add to this issue:</p>
+<pre class="highlight gherkin"><code><span class="nf">Given</span> that a customer buys a blue garment
+<span class="nf">And</span> I have two blue garments in stock
+<span class="nf">And</span> I have three black garments in stock
+<span class="nf">When</span> he returns the garment for a replacement in black
+<span class="nf">Then</span> I should have three blue garments in stock
+<span class="nf">And</span> two black garments in stock
+</code></pre>
+
+<h2 id="link-a-scenario-to-a-jira-issue">Link a Scenario to a JIRA Issue</h2>
+
+<p>You can link an existing scenario to an issue, so that any modifications to that scenario will generate an email notification explaining the content of the change and the user who made the change.
+To link a scenario to an issue, follow the steps below.</p>
+
+<ol>
+<li>Navigate to the <strong>Specification</strong> page an, on the left, choose a scenario that you want to link to a specific issue.</li>
+<li>Click the small JIRA icon adjacent to the <strong>Scenario</strong> heading.
+<img alt="Click the JIRA button to link a scenario to an existing user story" src="images/link_scenario_to_an_issue.jpeg" /></li>
+<li>A pop-up window will appear, similar to the figure below. Click the <strong>Link existing issue</strong> button.
+<img alt="Linking a scenario to an existing user story" src="images/link_scenario_to_an_issue_2.png" /></li>
+<li>In the text box, begin typing to search your issue list. When the issue is found click the <strong>Link</strong> button to establish the link.</li>
+</ol>
+
+<h2 id="status-mapping">Status Mapping</h2>
+
+<h1 id="test-automation">Test Automation</h1>
+
+<p>Once you have written your Scenarios inside JIRA, you can pull them to your development environment using one of our clients. We currently have clients for Maven and Gradle with Java, the .NET platform, Python and Ruby.</p>
+
+<h2 id="java-with-maven">Java with Maven</h2>
+
+<p>The first step is to add the Hindsight Software Maven repository to your projects Maven pom file.</p>
+<pre class="highlight xml"><code><span class="nt">&lt;pluginRepositories&gt;</span>
+    <span class="nt">&lt;pluginRepository&gt;</span>
+        <span class="nt">&lt;snapshots&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+        <span class="nt">&lt;/snapshots&gt;</span>
+        <span class="nt">&lt;id&gt;</span>hindsighttesting.release<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;name&gt;</span>Hindsight Software Release Repository<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;url&gt;</span>http://repo.hindsightsoftware.com/public-maven<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/pluginRepository&gt;</span>
+<span class="nt">&lt;/pluginRepositories&gt;</span>
+</code></pre>
+
+<p>Next, the plugin declaration can be added to the pom file. The plugin has 4 required parameters: &ldquo;server&rdquo; which is the url to your JIRA Server instance and &ldquo;projectKey&rdquo; which is the key of the ID of the project you want to generate acceptance tests for, &ldquo;username&rdquo; the User ID for accessing Behave Pro and &ldquo;password&rdquo; the API Key for authenticating the User ID and Project ID&rsquo;s.</p>
+<pre class="highlight xml"><code><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.hindsighttesting.behave<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>behave-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.4<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;configuration&gt;</span>
+        <span class="nt">&lt;server&gt;</span>https://behave.pro<span class="nt">&lt;/server&gt;</span>
+        <span class="nt">&lt;projectKey&gt;</span>10100<span class="nt">&lt;/projectKey&gt;</span>
+        <span class="nt">&lt;username&gt;</span>REPLACE WITH YOUR JIRA USERNAME<span class="nt">&lt;/username&gt;</span>
+        <span class="nt">&lt;password&gt;</span>REPLACE WITH YOUR JIRA PASSWORD<span class="nt">&lt;/password&gt;</span>
+    <span class="nt">&lt;/configuration&gt;</span>
+    <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>features<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+    <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<h3 id="configuring-cucumber">Configuring Cucumber</h3>
+
+<p>The first step is to add the cucumber dependencies to the maven project. We will be using Cucumber&rsquo;s JUnit runner to run our tests so JUnit will also be a dependency.</p>
+<pre class="highlight xml"><code><span class="nt">&lt;dependencies&gt;</span>
+    ...
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>info.cukes<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>cucumber-picocontainer<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.10<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.picocontainer<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>picocontainer<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.14.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>info.cukes<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>cucumber-junit<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.10<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>4.10<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    ...
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre>
+
+<p>Create a java class called &ldquo;CucumberIT&rdquo; in the &ldquo;src/test/java&rdquo; folder of your maven project. Annotate this class with the following annotations.</p>
+<pre class="highlight java"><code><span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">cucumber.junit.Cucumber</span><span class="o">;</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="n">Cucumber</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@Cucumber</span><span class="o">.</span><span class="na">Options</span><span class="o">(</span><span class="n">format</span> <span class="o">=</span> <span class="o">{</span> <span class="s">"json"</span><span class="o">,</span> <span class="s">"json:target/cucumber.json"</span> <span class="o">},</span> <span class="n">features</span> <span class="o">=</span> <span class="o">{</span> <span class="s">"target/generated-test-sources/"</span> <span class="o">},</span> <span class="n">strict</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CucumberIT</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre>
+
+<p>These annotations turn a standard JUnit test into a cucumber test which loads and executes the scenarios from JIRA (The behave-maven-plugin generates these). To run this JUnit/Cucumber test during the Maven integration-test phase you need to add the maven failsafe plugin.</p>
+<pre class="highlight xml"><code><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>maven-failsafe-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.12<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;id&gt;</span>integration-test<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>integration-test<span class="nt">&lt;/goal&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>verify<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+    <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre>
+
+<p>When you put this all together and run it using &ldquo;mvn verify&rdquo; the acceptance tests are extracted from JIRA and run by cucumber. From the output of Maven you can see the tests failed. They failed because Cucumber is trying to match each step in your Scenario with a method in Java and could find any matches. If it finds a matching method it will execute it or it fails the scenario (Test) and skip over the remaining steps in the scenario. All that is left to do is implement the cucumber step definitions.
+When Cucumber can&rsquo;t find a matching method to a step it will generate a code snippet for you to copy into your code and implement. In the console before the test results you will see code snippets for all the steps. All that is left to do is implement the cucumber step definitions by creating a new Java class in our project and copy &lsquo;n&rsquo; paste the snippets</p>
+
+<h2 id="java-with-gradle">Java with Gradle</h2>
+
+<p>The Gradle task can be installed automatically by configuring your Gradle scripts to fetch the task and its dependencies using standard Maven resolution.</p>
+<pre class="highlight groovy"><code><span class="n">buildscript</span> <span class="o">{</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">maven</span> <span class="o">{</span> <span class="n">url</span> <span class="s1">'http://repo.hindsightsoftware.com/public-maven'</span> <span class="o">}</span>
+        <span class="n">mavenCentral</span><span class="o">()</span>
+    <span class="o">}</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">classpath</span> <span class="nl">group:</span> <span class="s1">'com.hindsighttesting.behave'</span><span class="o">,</span> <span class="nl">name:</span> <span class="s1">'behave-gradle-task'</span><span class="o">,</span> <span class="nl">version:</span> <span class="s1">'1.0.0-1'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>The above script will automatically download the task from the Hindsight Maven repository, and make it available to the buildScript of your projects.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<h4 id="adding-a-task-to-download-acceptance-tests-from-behave">Adding a task to download Acceptance Tests from Behave</h4>
+
+<p>To download the Acceptance Tests (Feature files) you need to create a task implementing &ldquo;com.hindsighttesting.behave.gradle.FeaturesTask&rdquo;. This type has been added by the automatic installation described above.</p>
+<pre class="highlight groovy"><code><span class="n">task</span> <span class="nf">behavefeatures</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">hindsighttesting</span><span class="o">.</span><span class="na">behave</span><span class="o">.</span><span class="na">gradle</span><span class="o">.</span><span class="na">FeaturesTask</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">projectKey</span> <span class="o">=</span> <span class="s1">'10100'</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="s1">'https://behave.pro'</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="s1">'REPLACE WITH YOUR JIRA USERNAME'</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s1">'REPLACE WITH YOUR JIRA PASSWORD'</span>
+    <span class="n">destinationDir</span> <span class="o">=</span> <span class="s1">'build/generated-test-sources/cucumber'</span>
+<span class="o">}</span>
+</code></pre>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<h4 id="configuring-cucumber">Configuring Cucumber</h4>
+
+<p>Don&rsquo;t forget to execute the Behave Download Task before executing Cucumber, or you won&rsquo;t have any tests to execute. This can be simply done by adding a dependency from your Cucumber task to the Behave Task.</p>
+
+<blockquote>
+<p>dependsOn assemble, behavefeatures</p>
+</blockquote>
+
+<p>Also you will need to tell Cucumber where to find the Acceptance Tests (Feature files) you have downloaded (The &ldquo;destinationDir&rdquo; property in the Behave Task)</p>
+<pre class="highlight groovy"><code><span class="n">args</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'-f'</span><span class="o">,</span> <span class="s1">'pretty'</span><span class="o">,</span> <span class="s1">'--glue'</span><span class="o">,</span> <span class="s1">'build/classes/test'</span><span class="o">,</span> <span class="s1">'build/generated-test-sources/cucumber'</span><span class="o">]</span>
+</code></pre>
+
+<h2 id="ruby">Ruby</h2>
+
+<p>You have two options for working Behave, Cucumber and Ruby:
+1. The command line client
+2. Rake build scripts
+Both require the Behave gem to be installed</p>
+
+<h3 id="installing-the-behave-gem">Installing the Behave gem</h3>
+
+<p>The gem is hosted on RubyGems at https://rubygems.org/gems/behave and is available direct from the website or using RubyGems. Assuming you have Ruby and RubyGems installed on your system, run</p>
+
+<blockquote>
+<p>$ gem install behave</p>
+</blockquote>
+
+<p>and you will have installed the behave ruby client and its dependencies. Depending on your system, you may have to prefix the command with &ldquo;sudo&rdquo;</p>
+
+<h3 id="using-the-command-line">Using the command line</h3>
+
+<p>Installing the gem will have placed a binary on your path named &ldquo;behave&rdquo;. The output of &ldquo;behave &ndash;help&rdquo; is as follows:</p>
+<pre class="highlight shell"><code>Usage: behave <span class="o">[</span>options]
+
+Specific options:
+    -h, --host HOST                  Host URI <span class="k">for </span>JIRA installation - This should be https://behave.pro
+    -u, --user USER                  User ID from the JIRA Project Admin Page
+    -p, --pass PASS                  API Key from the JIRA Project Admin Page
+    -k, --key KEY                    Project ID from the JIRA Project Admin Page
+    -d, --directory <span class="o">[</span>DIR]            Specify output directory <span class="o">(</span>default <span class="s1">'features'</span><span class="o">)</span>
+    -m, --manual                     Include manual tagged scenarios <span class="k">in </span>download
+        --proxy PROXY_URL            Pass requests through a PROXY_URL
+        --bypass-ssl                 Bypass SSL certificate checking
+        --help                       Show this message
+        --version                    Show version
+</code></pre>
+
+<blockquote>
+<p>An example call could look like this:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>behave --host https://behave.pro <span class="se">\</span>
+  --user <span class="s2">"REPLACE WITH YOUR JIRA USERNAME"</span> <span class="se">\</span>
+  --pass <span class="s2">"REPLACE WITH YOUR JIRA PASSWORD"</span> <span class="se">\</span>
+  --key 10100 <span class="se">\</span>
+  --directory features <span class="se">\</span>
+  --manual
+</code></pre>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<p>This would download all .feature files from the PROJ project to the features directory (relative to the directory behave was run from), including all scenarios tagged as manual. Host and Key are the only required arguments, which defaults to an anonymous login downloading all features to the directory the command is run from.</p>
+
+<h3 id="rake">Rake</h3>
+
+<p>You are more than likely to be using Rake in your Ruby project for scripting your builds. Cucumber comes with its own Rake task ready for you to use and looks like this</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'cucumber/rake/task'</span>
+
+<span class="no">Cucumber</span><span class="o">::</span><span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:features</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">cucumber_opts</span> <span class="o">=</span> <span class="s2">"--format pretty"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This cucumber task can be executed using the following command</p>
+
+<blockquote>
+<p>$ rake features</p>
+</blockquote>
+
+<p>As our Features and Scenarios are stored within JIRA we will need to download them. To do this we will add a new Rake task that will download them using the &ldquo;Behave&rdquo; Ruby gem.</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'behave'</span>
+
+<span class="n">desc</span> <span class="s2">"Download features"</span>
+<span class="n">task</span> <span class="ss">:download</span> <span class="k">do</span>
+  <span class="no">Behave</span><span class="o">::</span><span class="no">FeatureDownloader</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="s1">'host'</span>   <span class="o">=&gt;</span> <span class="s1">'https://behave.pro'</span><span class="p">,</span>
+    <span class="s1">'user'</span>   <span class="o">=&gt;</span> <span class="s1">'REPLACE WITH YOUR JIRA USERNAME'</span><span class="p">,</span>
+    <span class="s1">'pass'</span>   <span class="o">=&gt;</span> <span class="s1">'REPLACE WITH YOUR JIRA PASSWORD'</span><span class="p">,</span>
+    <span class="s1">'key'</span>    <span class="o">=&gt;</span> <span class="mi">10100</span><span class="p">,</span>
+    <span class="s1">'dir'</span>    <span class="o">=&gt;</span> <span class="s1">'features'</span><span class="p">,</span>
+    <span class="s1">'manual'</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="p">})</span>
+<span class="k">end</span>
+</code></pre>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<p>This task can be executed using the following command</p>
+
+<blockquote>
+<p>$ rake download</p>
+</blockquote>
+
+<p>We can now download our Features and Scenarios from JIRA but we will always have to remember to run &ldquo;rake download&rdquo; before &ldquo;rake features&rdquo;. To avoid this we can configure the Cucumber &ldquo;features&rdquo; task to depend on the Behave &ldquo;download&rdquo; task and execute it before running Cucumber. This just requires one additional line in your rake file.</p>
+<pre class="highlight ruby"><code><span class="n">task</span> <span class="ss">:features</span> <span class="o">=&gt;</span> <span class="ss">:download</span>
+</code></pre>
+
+<blockquote>
+<p>The full Rakefile can be found in the example project on <a href="https://bitbucket.org/hindsightsoftwareltd/behave-ruby-example/src">Bitbucket</a></p>
+</blockquote>
+
+<h3 id="proxy">Proxy</h3>
+
+<p>If you need to specify a proxy to pass requests through, use the &ndash;proxy flag from the command line or pass &#39;proxy&rsquo; =&gt; &#39;MY_PROXY&rsquo; argument into FeatureDownloader i.e.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>behave --host https://behave.pro <span class="se">\</span>
+  --proxy https://some.proxy.url
+</code></pre>
+
+<blockquote>
+<p>or</p>
+</blockquote>
+<pre class="highlight ruby"><code><span class="n">task</span> <span class="ss">:download</span> <span class="k">do</span>
+  <span class="no">Behave</span><span class="o">::</span><span class="no">FeatureDownloader</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+    <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+    <span class="s1">'proxy'</span> <span class="o">=&gt;</span> <span class="s1">'http://some.proxy.url'</span>
+    <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+  <span class="p">})</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="bypassing-ssl">Bypassing SSL</h3>
+
+<p>If you experience problems with your SSL certificate, you can bypass SSL checking in behave by using the &ndash;bypass-ssl command line flag, or the &#39;bypass_ssl&rsquo; =&gt; true FeatureDownloader argument.</p>
+
+<h2 id="net">.NET</h2>
+
+<p>The Gherkin-compatible BDD tool that is generally used with .NET is <a href="http://http//www.specflow.org/">SpecFlow</a>.
+We host our .NET client on the <a href="http://www.nuget.org/packages/Hindsight.Behave">NuGet gallery</a>, and it is available through the NuGet Packet Manager Shell:</p>
+
+<blockquote>
+<p>PM&gt; Install-Package Hindsight.Behave</p>
+</blockquote>
+
+<p>Alternatively, you can use the built in NuGet Gallery interface from inside Visual Studio 2010/12</p>
+
+<h3 id="using-within-a-script">Using within a script</h3>
+
+<p>You can use the JIRA Connector within your own scripts to download features from Behave:</p>
+<pre class="highlight csharp"><code><span class="n">Using</span> <span class="n">Hindsight</span><span class="p">.</span><span class="n">Behave</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Demo</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Download</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">JiraConnector</span> <span class="n">jc</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">JiraConnector</span><span class="p">(</span><span class="s">"https://behave.pro"</span><span class="p">);</span>
+        <span class="n">jc</span><span class="p">.</span><span class="nf">Fetch</span><span class="p">(</span>
+            <span class="c1">// The project id of the target project
+</span>            <span class="n">project</span><span class="p">:</span> <span class="s">"10100"</span><span class="p">,</span>
+            <span class="c1">// The API Key username
+</span>            <span class="n">username</span><span class="p">:</span> <span class="s">"REPLACE WITH YOUR JIRA USERNAME"</span><span class="p">,</span>
+            <span class="c1">// The API Key value
+</span>            <span class="n">password</span><span class="p">:</span> <span class="s">"REPLACE WITH YOUR JIRA PASSWORD"</span><span class="p">,</span>
+            <span class="c1">// Directory to extract features to (relative to script)
+</span>            <span class="n">directory</span><span class="p">:</span> <span class="s">"features"</span><span class="p">,</span>
+            <span class="c1">// Boolean whether to include manual tests
+</span>            <span class="n">manual</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+            <span class="c1">// Boolean whether to verify the SSH certificate
+</span>            <span class="n">verify</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+            <span class="c1">// Boolean whether to return feature files that
+</span>            <span class="c1">// are compatible with NUnit.
+</span>            <span class="n">isNUnit</span><span class="p">:</span> <span class="k">true</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<p>This will download all features from project ID 10100 into the features director, including manual tagged scenarios.</p>
+
+<h3 id="using-with-msbuild">Using with MSBuild</h3>
+
+<p>You can use the Behave assembly as an MSBuild task as part of your build process. You can modify the build process for a project by &ldquo;unloading&rdquo; it in Visual Studio (right click the project in the solution explorer and click &ldquo;Unload Project&rdquo;) and then right clicking and clicking &ldquo;Edit {PROJECT}.csproj&rdquo;, or editing the .csproj file directly in the directory for the project.
+Create a new reference to the Behave.dll assembly, which will be in your project after using NuGet to install it:</p>
+<pre class="highlight xml"><code><span class="nt">&lt;UsingTask</span>
+    <span class="na">TaskName=</span><span class="s">"Behave"</span>
+    <span class="na">AssemblyFile=</span><span class="s">"path\to\the\Behave.dll"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<p>You can then use the Behave task to fetch features, either in one of the existing BeforeBuild or AfterBuild target blocks, or by defining your own as we have below:</p>
+<pre class="highlight xml"><code><span class="nt">&lt;Target</span> <span class="na">Name=</span><span class="s">"Test"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Behave</span>
+        <span class="na">host=</span><span class="s">"https://behave.pro"</span>
+        <span class="na">project=</span><span class="s">"10900"</span>
+        <span class="na">username=</span><span class="s">"REPLACE WITH YOUR JIRA USERNAME"</span>
+        <span class="na">password=</span><span class="s">"REPLACE WITH YOUR JIRA PASSWORD"</span>
+        <span class="na">directory=</span><span class="s">"Features\"</span>
+        <span class="na">manual=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/Target&gt;</span>
+</code></pre>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<aside class="notice">
+Add nunit=&ldquo;true&rdquo; to the task options if you need to use the NUnit runner. This strips characters from tags (traits) that NUnit doesn&rsquo;t work with.
+</aside>
+
+<h2 id="step-by-step-with-visual-studio-2013">Step by Step with Visual Studio 2013</h2>
+
+<p>This guide will take you from a new solution through to integrating Behave Pro with SpecFlow, and running the feature files.</p>
+
+<h3 id="visual-studio-setup">Visual Studio setup</h3>
+
+<p>Install <strong>SpecFlow for Visual Studio 2013</strong> from the Extensions and Updates dialog in the Tools menu, and restart Visual Studio when prompted.</p>
+
+<p><img alt="dotNET specflow extension" src="images/dot-net-specflow-extension.png" /></p>
+
+<h3 id="project-setup">Project setup</h3>
+
+<p>Create a new solution, containing a project for the Application and a project for the Specs (download the prepared solution file <a href="http://docs.behave.pro/assets/BehaveProExample.zip">here</a>).</p>
+
+<p><img alt="dot-net-project-overview.png" src="images/dot-net-project-overview.png" /></p>
+
+<p>Install the <strong>Hindsight.Behave</strong>, <strong>SpecFlow</strong>, <strong>SpecFlow.NUnit</strong>, <strong>NUnit</strong>, <strong>NUnit.Runners</strong> and <strong>NUnitTestAdapter</strong> into your solution, using the NuGet Package Manager from the Tools menu.</p>
+
+<p><img alt="dot-net-nuget.png" src="images/dot-net-nuget.png" /></p>
+
+<h2 id="configuring-msbuild-task">Configuring MSBuild task</h2>
+
+<p>Unload the Specs project, in order to edit the .csproj file (which is the MSBuild configuration used to build that particular project)</p>
+
+<h2 id="next">next</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"api_endpoint_here"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+</blockquote>
+
+<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+
+<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+
+<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
+
+<h1 id="kittens">Kittens</h1>
+
+<h2 id="get-all-kittens">Get All Kittens</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all kittens.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include_cats</td>
+<td>false</td>
+<td>If set to true, the result will also include cats.</td>
+</tr>
+<tr>
+<td>available</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific kitten.</p>
+
+<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to retrieve</td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified kitten could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
