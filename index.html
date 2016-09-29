@@ -182,6 +182,28 @@ To link a scenario to an issue, follow the steps below.</p>
 
 <h2 id="status-mapping">Status Mapping</h2>
 
+<h3 id="mapping-custom-statuses-from-jira-to-behave-pro">Mapping custom statuses from JIRA to Behave Pro</h3>
+
+<p>You can map custom JIRA statuses to the Behave Pro statuses by dragging unmapped statuses to a one of 3 columns, &ldquo;Open&rdquo;, &ldquo;Work in Progress&rdquo; and &ldquo;Closed&rdquo;.</p>
+
+<ul>
+<li><strong>OPEN</strong> for scenarios attached to issues that have not been started yet</li>
+<li><strong>WIP</strong> for scenarios attached to issues that are in progress, useful for selecting the current working set of scenarios</li>
+<li><strong>COMPLETED</strong> for scenarios attached to resolved issues, useful for regression testing existing functionality</li>
+</ul>
+
+<p>These statuses will be applied as tags on the exported scenarios, allowing you to filter them in the BDD tool of your choice. For example, in Cucumber-JVM, you would run WIP scenarios as follows:</p>
+
+<blockquote>
+<p>$ cucumber &ndash;tags @WIP</p>
+</blockquote>
+
+<p>To map your statuses to Behave Pro, go to the project administration page and click on the Behave Pro mapping sidebar item.</p>
+
+<p><img alt="project-admin-mapping.png" src="images/project-admin-mapping.png" /></p>
+
+<p>Any statuses that you have added to JIRA should show up in in the unmapped column, drag them to the appropriate column and it will autosave. That&rsquo;s it! Simple!</p>
+
 <h1 id="test-automation">Test Automation</h1>
 
 <p>Once you have written your Scenarios inside JIRA, you can pull them to your development environment using one of our clients. We currently have clients for Maven and Gradle with Java, the .NET platform, Python and Ruby.</p>
@@ -359,8 +381,8 @@ Both require the Behave gem to be installed</p>
 
 Specific options:
     -h, --host HOST                  Host URI <span class="k">for </span>JIRA installation - This should be https://behave.pro
-    -u, --user USER                  User ID from the JIRA Project Admin Page
-    -p, --pass PASS                  API Key from the JIRA Project Admin Page
+    -u, --user USER                  JIRA username
+    -p, --pass PASS                  JIRA Password
     -k, --key KEY                    Project ID from the JIRA Project Admin Page
     -d, --directory <span class="o">[</span>DIR]            Specify output directory <span class="o">(</span>default <span class="s1">'features'</span><span class="o">)</span>
     -m, --manual                     Include manual tagged scenarios <span class="k">in </span>download
@@ -537,7 +559,7 @@ You must replace <code>username</code> and <code>password</code> with your perso
 Add nunit=&ldquo;true&rdquo; to the task options if you need to use the NUnit runner. This strips characters from tags (traits) that NUnit doesn&rsquo;t work with.
 </aside>
 
-<h2 id="step-by-step-with-visual-studio-2013">Step by Step with Visual Studio 2013</h2>
+<h3 id="step-by-step-with-visual-studio-2013">Step by Step with Visual Studio 2013</h3>
 
 <p>This guide will take you from a new solution through to integrating Behave Pro with SpecFlow, and running the feature files.</p>
 
@@ -557,227 +579,192 @@ Add nunit=&ldquo;true&rdquo; to the task options if you need to use the NUnit ru
 
 <p><img alt="dot-net-nuget.png" src="images/dot-net-nuget.png" /></p>
 
-<h2 id="configuring-msbuild-task">Configuring MSBuild task</h2>
+<h3 id="configuring-msbuild-task">Configuring MSBuild task</h3>
 
 <p>Unload the Specs project, in order to edit the .csproj file (which is the MSBuild configuration used to build that particular project)</p>
 
-<h2 id="next">next</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p><img alt="dot-net-unload-project.png" src="images/dot-net-unload-project.png" />
+<img alt="dot-net-edit-project.png" src="images/dot-net-edit-project.png" /></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<p>In the .csproj file, uncomment the last section of the root Project element which defines Targets, and add the below code:</p>
+<pre class="highlight xml"><code>...
+<span class="nt">&lt;UsingTask</span>
+    <span class="na">TaskName=</span><span class="s">"Behave"</span>
+    <span class="na">AssemblyFile=</span><span class="s">"..\packages\Hindsight.Behave.0.1.8\lib\Behave.dll"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;Target</span> <span class="na">Name=</span><span class="s">"BeforeBuild"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Behave</span>
+        <span class="na">host=</span><span class="s">"https://behave.pro"</span>
+        <span class="na">project=</span><span class="s">"10900"</span>
+        <span class="na">username=</span><span class="s">"REPLACE WITH YOUR JIRA USERNAME"</span>
+        <span class="na">password=</span><span class="s">"REPLACE WITH YOUR JIRA PASSWORD"</span>
+        <span class="na">directory=</span><span class="s">"Features\"</span>
+        <span class="na">manual=</span><span class="s">"true"</span> 
+        <span class="na">nunit=</span><span class="s">"true</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/Target&gt;</span>
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+<p>In the UsingTask block, the AssemblyFile path can be found further up the .csproj file:</p>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p><img alt="dot-net-assemblyfile-path.png" src="images/dot-net-assemblyfile-path.png" /></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Then, reload the project from the Project Explorer.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<h3 id="fetching-and-including-feature-files-from-behave-pro">Fetching and including Feature files from Behave Pro</h3>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
+<p>By building the Specs project, the Feature files will be fetched from Behave Pro. They will not initially be visible in the project explorer, so if you click &ldquo;Show All Files&rdquo; you can include the Features directory into the project.</p>
+
+<p><img alt="dot-net-include.png" src="images/dot-net-include.png" /></p>
+
+<h3 id="generating-step-definitions">Generating step definitions</h3>
+
+<p>Follow the <a href="http://www.specflow.org/getting-started/">SpecFlow Getting Started guide</a> to generate Step definitions for all the .feature files that were fetched.</p>
+
+<h3 id="filtering-which-scenarios-to-run">Filtering which scenarios to run</h3>
+
+<p>The build tool will download all the features for the project to your local machine. In order to only run certain tests (e.g. by tag, by assignee, by issue), switch the Test Explorer view to Traits.</p>
+
+<p><img alt="dot-net-traits.png" src="images/dot-net-traits.png" /></p>
+
+<h2 id="python">Python</h2>
+
+<p>We host our Python client <a href="http://pypi.python.org/pypi/hindsight">PyPi</a>, and it is available through pip or by direct download. Assuming you have Python and pip installed on your system, run:</p>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>$ pip install hindsight</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>You will have installed the behave python client and all its dependencies. Depending on your system, you may have to prefix the command with &ldquo;sudo&rdquo;</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h3 id="using-from-the-command-line">Using from the command line</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p>Installing the package will have placed a binary on your path named &ldquo;behave-cli&rdquo;. The output of &ldquo;behave-cli &ndash;help&rdquo; is as follows:</p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<blockquote>
+<p>$ behave-cli HOST KEY [-u USERNAME] [-p PASSWORD] [-d DIR] [-m]</p>
+</blockquote>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+<p>An example usage would be:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>behave-cli https://behave.pro 10100 <span class="se">\</span>
+  -u <span class="s2">"REPLACE WITH YOUR JIRA USERNAME"</span> <span class="se">\</span>
+  -p <span class="s2">"REPLACE WITH YOUR JIRA PASSWORD"</span> <span class="se">\</span>
+  -d features <span class="se">\</span>
+  -m
+</code></pre>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>which uses your API key user name and value to download features from project ID 10100 into the features directory, including all manual scenarios.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h3 id="using-from-within-a-script">Using from within a script</h3>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>You can use the JIRA connector within your own scripts to download features from Behave</p>
+<pre class="highlight python"><code><span class="c">#!/usr/bin/env python</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="kn">from</span> <span class="nn">hindsight.behave</span> <span class="kn">import</span> <span class="n">JiraConnector</span>
+
+<span class="n">jc</span> <span class="o">=</span> <span class="n">JiraConnector</span><span class="p">()</span>
+<span class="n">jc</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span>
+  <span class="n">host</span><span class="o">=</span><span class="s">'https://behave.pro'</span><span class="p">,</span>
+  <span class="n">username</span><span class="o">=</span><span class="s">'REPLACE WITH YOUR JIRA USERNAME'</span><span class="p">,</span>
+  <span class="n">password</span><span class="o">=</span><span class="s">'REPLACE WITH YOUR JIRA PASSWORD'</span><span class="p">,</span>
+  <span class="n">key</span><span class="o">=</span><span class="s">'10100'</span><span class="p">,</span>
+  <span class="nb">dir</span><span class="o">=</span><span class="s">'features'</span><span class="p">,</span>
+  <span class="n">manual</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
 </code></pre>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<p>This will download all features from project ID 10100 into the features director, including manual tagged scenarios.</p>
+
+<h2 id="nodejs">NodeJS</h2>
+
+<p>The Behave Pro Node client is available from <a href="https://www.npmjs.com/package/behavepro">NPM</a>, and can be installed using the following:</p>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>$ npm install behavepro -g</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
+
+<p>NodeJS and NPM are both required to be installed.</p>
+
+<h3 id="using-from-the-command-line">Using from the command line</h3>
+
+<p>Parameters can either be passed from the command line:</p>
+
+<blockquote>
+<p>$ behavepro [&ndash;id PROJECT ID] [&ndash;userId USER] [&ndash;apiKey KEY]</p>
+</blockquote>
+
+<p>Available parameters:</p>
+
+<ul>
+<li><strong>[&ndash;host HOST]</strong> Behave Pro host (JIRA instance url)</li>
+<li><strong>[&ndash;id PROJECT ID]</strong> JIRA project id</li>
+<li><strong>[&ndash;userId USER]</strong> JIRA username</li>
+<li><strong>[&ndash;apiKey KEY]</strong> JIRA password</li>
+<li><strong>[&ndash;output DIRECTORY]</strong> Output directory - default: &#39;features&rsquo;</li>
+<li><strong>[&ndash;manual]</strong> Include scenarios marked as manual</li>
+<li><strong>[&ndash;config CONFIG]</strong> JSON config file - relative to current directory</li>
+</ul>
+
+<aside class="notice">
+You must replace <code>username</code> and <code>password</code> with your personal JIRA credentials.
+</aside>
+
+<p>If the three required parameters are missing, they will be attempted to be read from a json config file in the current directory:</p>
+
+<blockquote>
+<p>$ behavepro</p>
+</blockquote>
+
+<p><code class="prettyprint">config.json</code> example</p>
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPLACE WITH YOUR JIRA USERNAME"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPLACE WITH YOUR JIRA PASSWORD"</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPLACE WITH YOUR JIRA USERNAME"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPLACE WITH YOUR JIRA PASSWORD"</span><span class="w">
+</span><span class="p">}]</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<h3 id="using-from-within-a-script">Using from within a script</h3>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>You can use the client in your own scripts to download features from Behave Pro.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<blockquote>
+<p>$ npm install behavepro &ndash;save</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">BehavePro</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'behavepro'</span><span class="p">);</span>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<span class="nx">BehavePro</span><span class="p">({</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+  <span class="s2">"userId"</span><span class="p">:</span> <span class="s2">"REPLACE WITH YOUR JIRA USERNAME"</span><span class="p">,</span>
+  <span class="s2">"apiKey"</span><span class="p">:</span> <span class="s2">"REPLACE WITH YOUR JIRA PASSWORD"</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// done</span>
+<span class="p">});</span>
+</code></pre>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<p>Available parameters:</p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-
-          <h1 id="errors">Errors</h1>
-
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
-</tr>
-</tbody></table>
+<ul>
+<li><strong>&ldquo;host&rdquo;: HOST</strong> - Behave Pro host - default: &#39;https://behave.pro&rsquo;</li>
+<li><strong>&ldquo;id&rdquo;: ID</strong> - JIRA project id</li>
+<li><strong>&ldquo;userId&rdquo;: USERID</strong> - JIRA username</li>
+<li><strong>&ldquo;apiKey&rdquo;: APIKEY</strong> - JIRA password</li>
+<li><strong>&ldquo;output&rdquo;: DIRECTORY</strong> - Output directory - default: &#39;features&rsquo;</li>
+<li><strong>&ldquo;manual&rdquo;: true</strong> - Include scenarios marked as manual</li>
+</ul>
 
       </div>
       <div class="dark-box">
