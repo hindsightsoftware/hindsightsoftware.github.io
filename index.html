@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Behave Pro Documentation</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -110,6 +110,25 @@
     .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6, .content > p, .content > table, .content > ul, .content > ol, .content > aside, .content > dl {
       width: 100% !important;
     }
+    .tocify-wrapper > a > img {
+      max-width: 80%;
+      padding: 20px;
+    }
+    .content aside {
+      text-shadow: 0 1px 0 #ccd9ea;
+      background: #ebf2f9;
+    }
+
+    .content a {
+      color: #3572b0;
+      text-decoration: none;
+    }
+    .content a:hover {
+      text-decoration: underline;
+    }
+    .content p {
+      margin-top: 10px;
+    }
     </style>
   </head>
 
@@ -121,7 +140,7 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.png" />
+      <a href="https://www.hindsightsoftware.com/home"><img src="images/logo.png" /></a>
         <div class="lang-selector">
         </div>
         <div class="search">
@@ -131,7 +150,6 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -398,9 +416,7 @@ Specific options:
         --version                    Show version
 </code></pre>
 
-<blockquote>
 <p>An example call could look like this:</p>
-</blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>behave --host https://behave.pro <span class="se">\</span>
   --user <span class="s2">"REPLACE WITH YOUR JIRA USERNAME"</span> <span class="se">\</span>
   --pass <span class="s2">"REPLACE WITH YOUR JIRA PASSWORD"</span> <span class="se">\</span>
