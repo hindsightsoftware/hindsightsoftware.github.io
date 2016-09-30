@@ -105,6 +105,10 @@
       white-space: -o-pre-wrap;
       word-wrap: break-word;
       float: none;
+      width: 100% !important;
+    }
+    .content > h1, .content > h2, .content > h3, .content > h4, .content > h5, .content > h6, .content > p, .content > table, .content > ul, .content > ol, .content > aside, .content > dl {
+      width: 100% !important;
     }
     </style>
   </head>
@@ -132,7 +136,6 @@
         </ul>
     </div>
     <div class="page-wrapper">
-      <div class="dark-box"></div>
       <div class="content">
         <h1 id="using-behave-pro">Using Behave Pro</h1>
 
@@ -171,14 +174,17 @@
 <p>You can link an existing scenario to an issue, so that any modifications to that scenario will generate an email notification explaining the content of the change and the user who made the change.
 To link a scenario to an issue, follow the steps below.</p>
 
-<ol>
-<li>Navigate to the <strong>Specification</strong> page an, on the left, choose a scenario that you want to link to a specific issue.</li>
-<li>Click the small JIRA icon adjacent to the <strong>Scenario</strong> heading.
-<img alt="Click the JIRA button to link a scenario to an existing user story" src="images/link_scenario_to_an_issue.jpeg" /></li>
-<li>A pop-up window will appear, similar to the figure below. Click the <strong>Link existing issue</strong> button.
-<img alt="Linking a scenario to an existing user story" src="images/link_scenario_to_an_issue_2.png" /></li>
-<li>In the text box, begin typing to search your issue list. When the issue is found click the <strong>Link</strong> button to establish the link.</li>
-</ol>
+<p>1. Navigate to the <strong>Specification</strong> page an, on the left, choose a scenario that you want to link to a specific issue.</p>
+
+<p>2. Click the small JIRA icon adjacent to the <strong>Scenario</strong> heading.</p>
+
+<p><img alt="Click the JIRA button to link a scenario to an existing user story" src="images/link_scenario_to_an_issue.jpeg" /></p>
+
+<p>3. A pop-up window will appear, similar to the figure below. Click the <strong>Link existing issue</strong> button.</p>
+
+<p><img alt="Linking a scenario to an existing user story" src="images/link_scenario_to_an_issue_2.png" /></p>
+
+<p>4. In the text box, begin typing to search your issue list. When the issue is found click the <strong>Link</strong> button to establish the link.</p>
 
 <h2 id="status-mapping">Status Mapping</h2>
 
@@ -766,10 +772,6 @@ You must replace <code>username</code> and <code>password</code> with your perso
 <li><strong>&ldquo;manual&rdquo;: true</strong> - Include scenarios marked as manual</li>
 </ul>
 
-      </div>
-      <div class="dark-box">
-          <div class="lang-selector">
-          </div>
       </div>
     </div>
   </body>
